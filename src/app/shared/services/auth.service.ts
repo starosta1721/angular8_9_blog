@@ -16,6 +16,7 @@ export class AuthService {
 }
 
     login(user: User): Observable<any> {
+        user.returnSecureToken = true;
         return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
         .pipe(
             tap(this.setToken)
@@ -31,6 +32,8 @@ export class AuthService {
     }
 
     private setToken(response: FireBaseAuthResponse) {
-        console.log(response);
+        const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
+        localStorage.setItem('fireBase-token', response.idToken)
+        localStorage.setItem('fireBase-token-expires', expDate.toString())
     }
 }

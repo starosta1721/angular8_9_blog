@@ -5,4 +5,5 @@ export interface Environment {
 
 export interface FireBaseAuthResponse {
     idToken: string
+    expiresIn: string
 }
