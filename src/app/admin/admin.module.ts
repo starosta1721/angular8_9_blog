@@ -41,7 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     exports: [
         RouterModule
     ],
-    providers: [AuthService, AuthGuard]
+    providers: [AuthGuard]
 })
 export class AdminModule {
 
