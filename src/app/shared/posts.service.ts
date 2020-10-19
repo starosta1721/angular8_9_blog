@@ -19,11 +19,11 @@ export class PostService {
                 ...post,
                 id: response.name,
                 date: new Date(post.date)
-            }
-        }))
+            };
+        }));
     }
 
-     getAll(): Observable<Post> {
+     getAll(): Observable<any> {
          return this.http.get(`${environment.fbDbUrl}/posts.json`)
             .pipe(map( (response: {[key:string]: any}) => {
                 return Object
@@ -32,8 +32,12 @@ export class PostService {
                     ...response[key],
                     id: key,
                     date: new Date(response[key].date)
-                }))
+                }));
                
-            }))
+            }));
+     }
+
+     remove(id: string): Observable<void> {
+         return this.http.delete<void>(`${environment.fbDbUrl}/posts/${id}.json`);
      }
 }
